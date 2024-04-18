@@ -1,0 +1,26 @@
+INSERT INTO banks (bank_name, city)
+VALUES ('Bank of Percy', 'Orario');
+
+
+INSERT INTO bank.employees
+(employee_id,first_name,last_name,is_manager,bank_id)
+VALUES
+(1,"Shion","Kono",TRUE, 1),
+(2,"Henry","Graham",TRUE, 1),
+(3,"Elen","Manuet",TRUE, 1);
+
+INSERT INTO `bank`.`customers`
+(`first_name`,`last_name`,`password`)
+VALUES
+("Gustav","Eisenfaust","gustav01"),
+("Dante","Alighieri","dante02"),
+("Thorn","Carnel","thorn03");
+
+INSERT INTO `bank`.`bank_account`
+(`customer_id`,`type`,`deal`,`balance`,`bank_id`)
+VALUES
+(1,"Regular","5% Bi-monthly",63817146,1),
+(2,"VIP","2% Interest",95370000,1),
+(3,"Regular","2% Interest",57605198,1);
+
+
