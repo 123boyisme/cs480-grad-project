@@ -1,0 +1,43 @@
+CREATE TABLE customers (
+    customer_id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    password VARCHAR(255) NOT NULL  -- Adding the password field
+);
+
+CREATE TABLE banks (
+    bank_id INT PRIMARY KEY AUTO_INCREMENT,
+    bank_name VARCHAR(100) NOT NULL,
+    city VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE employees (
+    employee_id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    is_manager BOOLEAN NOT NULL,
+    bank_id INT NOT NULL,
+    FOREIGN KEY (bank_id) REFERENCES banks(bank_id)  -- Updated reference to the 'banks' table
+);
+
+CREATE TABLE bank_account (
+    account_number BIGINT PRIMARY KEY AUTO_INCREMENT,
+    customer_id INT NOT NULL,
+    type ENUM('Owner', 'VIP', 'Regular') NOT NULL,
+    deal ENUM('2% Interest', '5% Bi-monthly'),
+    balance DECIMAL(15,2) NOT NULL,
+    bank_id INT NOT NULL,
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
+    FOREIGN KEY (bank_id) REFERENCES banks(bank_id)  -- Updated reference to the 'banks' table
+);
+
+CREATE TABLE transaction (
+    transaction_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    account_number BIGINT NOT NULL,
+    type VARCHAR(50) NOT NULL,
+    amount DECIMAL(15,2) NOT NULL,
+    timestamp DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    reason VARCHAR(255),
+    FOREIGN KEY (account_number) REFERENCES bank_account(account_number)
+);
+
